@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: MovieSystem
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://101.42.159.228:3306/movie?serverTimezone=UTC
+      username: root
+      password: Zty200208.
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      table-prefix: tb_
+      logic-delete-field: isdeleted
+      logic-not-delete-value: 0
+      logic-delete-value: 1
+server:
+  port: 8080
