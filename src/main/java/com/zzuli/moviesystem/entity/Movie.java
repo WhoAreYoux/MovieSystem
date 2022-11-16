@@ -1,7 +1,8 @@
 package com.zzuli.moviesystem.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -48,7 +49,7 @@ public class Movie {
     /**
      * 出品年份
      */
-    private LocalDateTime time;
+    private LocalDate time;
 
     /**
      * 评分

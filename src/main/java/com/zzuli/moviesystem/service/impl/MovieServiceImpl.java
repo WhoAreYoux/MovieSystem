@@ -31,4 +31,15 @@ public class MovieServiceImpl extends ServiceImpl<MovieMapper, Movie> implements
         page(pageInfo, queryWrapper);
         return pageInfo;
     }
+
+    @Override
+    public void deleteByIds(List<Long> ids) {
+        LambdaQueryWrapper<Movie> queryWrapper=new LambdaQueryWrapper<>();
+        queryWrapper.in(ids!=null,Movie::getId,ids);
+        List<Movie> list = list(queryWrapper);
+        for (Movie movie : list){
+            Long id = movie.getId();
+            removeById(id);
+        }
+    }
 }

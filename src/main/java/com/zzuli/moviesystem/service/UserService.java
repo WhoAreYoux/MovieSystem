@@ -1,8 +1,11 @@
 package com.zzuli.moviesystem.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zzuli.moviesystem.entity.Result;
 import com.zzuli.moviesystem.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -14,5 +17,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserService extends IService<User> {
 
-    public Page pageUser(int page, int pageSize, String name);
+    Result<Page> pageUser(int page, int pageSize, String phone);
+
+
+    Result<String> login(User user, HttpServletRequest request);
 }
