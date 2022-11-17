@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 /**
  * <p>
- * mysql 代码生成器演示例子
+ * mysql 代码生成器
  * </p>
  */
 public class MysqlGenerator {
