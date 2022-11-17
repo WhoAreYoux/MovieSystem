@@ -5,6 +5,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zzuli.moviesystem.entity.Movie;
 import com.zzuli.moviesystem.entity.Result;
 import com.zzuli.moviesystem.service.MovieService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -19,6 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/movie")
+@Api(tags = "套餐相关接口")
 public class MovieController {
 
     @Autowired
@@ -32,13 +37,27 @@ public class MovieController {
      * @param name 电影名
      * @return Result类封装page结果
      */
+    @ApiOperation(value = "电影分页查询接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page",value = "页码",required = true,dataTypeClass = int.class),
+            @ApiImplicitParam(name = "pageSize",value = "每页记录数",required = true,dataTypeClass = int.class),
+            @ApiImplicitParam(name = "name",value = "电影名称",required = false,dataTypeClass = String.class)
+    })
     @GetMapping("/page")
     public Result<Page> page(int page, int pageSize, String name){
         Page pageMovie = movieService.pageMovie(page, pageSize, name);
         return Result.success(pageMovie);
     }
 
-
+    /**
+     * 保存电影
+     * @param movie movie封装信息
+     * @return result封装提示信息
+     */
+    @ApiOperation(value = "保存电影接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "movie",value = "封装电影实体类",required = true,dataTypeClass = Movie.class)
+    })
     @PostMapping
     public Result<String> save(@RequestBody Movie movie){
         boolean save = movieService.save(movie);
@@ -49,6 +68,15 @@ public class MovieController {
     }
 
 
+    /**
+     * 修改电影信息
+     * @param movie movie封装信息
+     * @return result封装提示信息
+     */
+    @ApiOperation(value = "修改电影接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "movie",value = "封装电影实体类",required = true,dataTypeClass = Movie.class),
+    })
     @PutMapping
     public Result<String> update(@RequestBody Movie movie){
         boolean flag = movieService.updateById(movie);
@@ -58,6 +86,16 @@ public class MovieController {
         return Result.success("更新成功");
     }
 
+
+    /**
+     * 删除电影
+     * @param ids id列表
+     * @return result封装提示信息
+     */
+    @ApiOperation(value = "删除电影接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "ids",value = "删除的电影id列表",required = true,dataTypeClass = List.class)
+    })
     @DeleteMapping
     public Result<String> delete(@RequestParam List<Long> ids){
         System.out.println(ids);

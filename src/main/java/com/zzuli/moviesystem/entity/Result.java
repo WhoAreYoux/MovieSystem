@@ -1,5 +1,7 @@
 package com.zzuli.moviesystem.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -10,12 +12,16 @@ import java.io.Serializable;
  */
 
 @Data
+@ApiModel("封装返回结果")
 public class Result<T> implements Serializable {
 
+    @ApiModelProperty("状态码")
     private Integer code; //状态码：1成功，0和其它数字为失败
 
+    @ApiModelProperty("失败提示信息")
     private String msg; //提示信息
 
+    @ApiModelProperty("成功返回数据")
     private T data; //数据
 
 

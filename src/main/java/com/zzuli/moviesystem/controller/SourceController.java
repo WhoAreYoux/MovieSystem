@@ -1,7 +1,12 @@
 package com.zzuli.moviesystem.controller;
 
 
+import com.zzuli.moviesystem.entity.News;
 import com.zzuli.moviesystem.entity.Result;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +25,7 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequestMapping("/source")
+@Api(tags = "资源下载相关接口")
 public class SourceController {
 
     @Value("${movieSystem.pictureUrl}")
@@ -35,6 +41,10 @@ public class SourceController {
      * @param file  文件格式MultipartFile的文件
      * @return 封装文件名的result结果
      */
+    @ApiOperation(value = "图片上传接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "file",value = "MultipartFile图片文件",required = true,dataTypeClass = MultipartFile.class)
+    })
     @PostMapping("/picUpload")
     public Result<String> picUpload(MultipartFile file){
         //file是一个临时文件，需要转存到指定位置，否则本次请求完成后临时文件会删除
@@ -47,6 +57,10 @@ public class SourceController {
      * @param file 文件格式MultipartFile的文件
      * @return 封装文件名的result结果
      */
+    @ApiOperation(value = "视频上传接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "file",value = "MultipartFile视频文件",required = true,dataTypeClass = MultipartFile.class)
+    })
     @PostMapping("/videoUpload")
     public Result<String> videoUpload(MultipartFile file){
         String filename = upload(file, videoBasePath);
@@ -58,6 +72,10 @@ public class SourceController {
      * @param name 需要下载的文件名
      * @param response
      */
+    @ApiOperation(value = "图片下载接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name",value = "图片文件名",required = true)
+    })
     @GetMapping("/picDownload")
     public void picDownload(String name, HttpServletResponse response){
         downloadSource(name, response,picBasePath,picType);
@@ -68,6 +86,10 @@ public class SourceController {
      * @param name 需要下载的文件名
      * @param response
      */
+    @ApiOperation(value = "视频下载接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name",value = "视频文件名",required = true)
+    })
     @GetMapping("/videoDownload")
     public void videoDownload(String name, HttpServletResponse response){
         downloadSource(name, response,videoBasePath,videoType);
