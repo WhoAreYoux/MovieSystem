@@ -25,10 +25,10 @@ import java.util.List;
 public class TypeServiceImpl extends ServiceImpl<TypeMapper, Type> implements TypeService {
 
     @Override
-    public Page pageType(int page, int pageSize) {
+    public Result<Page> pageType(int page, int pageSize) {
         Page<Type> pageInfo = new Page<>(page, pageSize);
         page(pageInfo, null);
-        return pageInfo;
+        return Result.success(pageInfo);
     }
 
     @Override

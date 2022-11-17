@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface TypeService extends IService<Type> {
 
-    Page pageType(int page, int pageSize);
+    Result<Page> pageType(int page, int pageSize);
 
     Result<String> saveType(Type type);
 

@@ -45,8 +45,7 @@ public class MovieController {
     })
     @GetMapping("/page")
     public Result<Page> page(int page, int pageSize, String name){
-        Page pageMovie = movieService.pageMovie(page, pageSize, name);
-        return Result.success(pageMovie);
+        return movieService.pageMovie(page, pageSize, name);
     }
 
     /**

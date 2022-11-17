@@ -43,8 +43,7 @@ public class TypeController {
     })
     @GetMapping("/page")
     public Result<Page> page(int page, int pageSize) {
-        Page pageType = typeService.pageType(page, pageSize);
-        return Result.success(pageType);
+        return typeService.pageType(page, pageSize);
     }
 
 
