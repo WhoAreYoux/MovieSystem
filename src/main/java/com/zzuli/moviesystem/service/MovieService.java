@@ -3,6 +3,7 @@ package com.zzuli.moviesystem.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zzuli.moviesystem.entity.Movie;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zzuli.moviesystem.entity.Result;
 
 import java.util.List;
 
@@ -16,7 +17,10 @@ import java.util.List;
  */
 public interface MovieService extends IService<Movie> {
 
-    Page pageMovie(int page, int pageSize, String name);
+    Result<Page> pageMovie(int page, int pageSize, String name);
+
+    Result<String> saveWithType(Movie movie);
 
     void deleteByIds(List<Long> ids);
+
 }

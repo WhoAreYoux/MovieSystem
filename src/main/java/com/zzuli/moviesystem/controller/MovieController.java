@@ -41,35 +41,44 @@ public class MovieController {
      */
     @GetMapping("/page")
     public Result<Page> page(int page, int pageSize, String name){
-        Page pageMovie = movieService.pageMovie(page, pageSize, name);
-        return Result.success(pageMovie);
+        return movieService.pageMovie(page, pageSize, name);
     }
 
 
+    /**
+     * 新增电影
+     * @param movie 实体类movie
+     * @return Result封装提示信息
+     */
     @PostMapping
     public Result<String> save(@RequestBody Movie movie){
-        boolean save = movieService.save(movie);
-        if(!save){
-            return Result.error("添加失败");
-        }
-        return Result.success(null);
+        return movieService.saveWithType(movie);
     }
 
-
+    /**
+     * 更新电影
+     * @param movie 实体类movie
+     * @return Result封装提示信息
+     */
     @PutMapping
     public Result<String> update(@RequestBody Movie movie){
         boolean flag = movieService.updateById(movie);
         if(!flag){
             return Result.error("更新失败");
         }
-        return Result.success(null);
+        return Result.success("更新成功");
     }
 
+    /**
+     * 删除电影
+     * @param ids id列表
+     * @return Result封装提示信息
+     */
     @DeleteMapping
     public Result<String> delete(@RequestParam List<Long> ids){
         System.out.println(ids);
         movieService.deleteByIds(ids);
-        return Result.success(null);
+        return Result.success("删除成功");
     }
 
 }

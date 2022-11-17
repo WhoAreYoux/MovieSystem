@@ -45,6 +45,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return Result.error("账号或密码错误");
         }
         request.getSession().setAttribute("phone",one.getPhone());
-        return Result.success(null);
+        return Result.success("登录成功");
     }
 }

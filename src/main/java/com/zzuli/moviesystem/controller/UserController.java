@@ -28,11 +28,24 @@ public class UserController {
     private UserService userService;
 
 
+    /**
+     * 分页查询
+     * @param page 起始页
+     * @param pageSize 页的大小
+     * @param phone 手机号
+     * @return 返回Result封装的page对象
+     */
     @GetMapping("/page")
     public Result<Page> page(int page, int pageSize, String phone){
         return userService.pageUser(page, pageSize, phone);
     }
 
+    /**
+     * 登录
+     * @param user 用户信息
+     * @param request request请求对象
+     * @return 返回Result封装的提示信息
+     */
     @PostMapping("/login")
     public Result<String> login(@RequestBody User user,HttpServletRequest request){
         return userService.login(user,request);
@@ -41,14 +54,14 @@ public class UserController {
 
     /**
      * 退出登录
-     * @param request
-     * @return
+     * @param request request请求对象
+     * @return 返回Result封装的提示信息
      */
     @PostMapping("/logout")
     public Result<String> logout(HttpServletRequest request){
         //清除session中的id
         request.getSession().removeAttribute("phone");
-        return Result.success(null);
+        return Result.success("退出成功");
     }
 }
 
