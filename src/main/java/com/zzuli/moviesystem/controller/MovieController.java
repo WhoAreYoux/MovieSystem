@@ -1,20 +1,13 @@
 package com.zzuli.moviesystem.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zzuli.moviesystem.entity.Movie;
 import com.zzuli.moviesystem.entity.Result;
 import com.zzuli.moviesystem.service.MovieService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import org.springframework.stereotype.Controller;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -52,7 +45,7 @@ public class MovieController {
         if(!save){
             return Result.error("添加失败");
         }
-        return Result.success(null);
+        return Result.success("添加成功");
     }
 
 
@@ -62,14 +55,14 @@ public class MovieController {
         if(!flag){
             return Result.error("更新失败");
         }
-        return Result.success(null);
+        return Result.success("更新成功");
     }
 
     @DeleteMapping
     public Result<String> delete(@RequestParam List<Long> ids){
         System.out.println(ids);
         movieService.deleteByIds(ids);
-        return Result.success(null);
+        return Result.success("删除成功");
     }
 
 }

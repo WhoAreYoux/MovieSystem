@@ -48,7 +48,7 @@ public class UserController {
     public Result<String> logout(HttpServletRequest request){
         //清除session中的id
         request.getSession().removeAttribute("phone");
-        return Result.success(null);
+        return Result.success("退出成功");
     }
 }
 
